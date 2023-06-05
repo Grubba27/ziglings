@@ -35,10 +35,12 @@ pub fn main() void {
         std.debug.print("{}", .{num});
 
         const n = numberMaybeFail(num);
+
         if (n) |value| {
             std.debug.print("={}. ", .{value});
         } else |err| switch (err) {
             MyNumberError.TooBig => std.debug.print(">4. ", .{}),
+            MyNumberError.TooSmall => std.debug.print("<4. ", .{}),
             // Please add a match for TooSmall here and have it print: "<4. "
         }
     }
