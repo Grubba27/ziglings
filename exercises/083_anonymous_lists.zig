@@ -21,5 +21,11 @@ pub fn main() void {
     //     = .{ 'h', 'e', 'l', 'l', 'o' };
     //
     const hello = .{ 'h', 'e', 'l', 'l', 'o' };
-    print("I say {s}!\n", .{hello});
+    const fields = @typeInfo(@TypeOf(hello)).Struct.fields;
+    var l: [5]u8 = .{  };
+    inline for (fields, 0..) |field, i| {
+        l[i] = @field(hello, field.name);
+    }
+
+    print("I say {s}!\n", .{l});
 }
